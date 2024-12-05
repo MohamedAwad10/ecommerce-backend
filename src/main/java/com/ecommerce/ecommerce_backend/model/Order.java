@@ -1,13 +1,11 @@
 package com.ecommerce.ecommerce_backend.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Set;
 
-@Setter
-@Getter
+//@Setter
+//@Getter
 @Entity
 @Table(name = "web_order")
 public class Order {
@@ -27,4 +25,37 @@ public class Order {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Set<ProductOrderQuantity> quantities;
+
+    public Long getId() {
+
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalUser getUser() {
+        return user;
+    }
+
+    public void setUser(LocalUser user) {
+        this.user = user;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Set<ProductOrderQuantity> getQuantities() {
+        return quantities;
+    }
+
+    public void setQuantities(Set<ProductOrderQuantity> quantities) {
+        this.quantities = quantities;
+    }
 }
