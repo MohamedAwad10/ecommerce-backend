@@ -1,5 +1,6 @@
 package com.ecommerce.ecommerce_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 //@Setter
@@ -25,6 +26,7 @@ public class Address {
     @Column(name = "city", nullable = false)
     private String city;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private LocalUser user;

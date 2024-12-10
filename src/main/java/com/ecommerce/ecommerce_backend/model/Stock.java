@@ -1,5 +1,6 @@
 package com.ecommerce.ecommerce_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 //@Setter
@@ -16,6 +17,7 @@ public class Stock {
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "product_id", nullable = false, unique = true)
     private Product product;

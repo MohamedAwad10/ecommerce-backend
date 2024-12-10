@@ -1,5 +1,6 @@
 package com.ecommerce.ecommerce_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 //@Setter
@@ -20,6 +21,7 @@ public class ProductOrderQuantity {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
     private Order order;
