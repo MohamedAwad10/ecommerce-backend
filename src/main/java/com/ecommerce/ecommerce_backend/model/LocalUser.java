@@ -1,5 +1,6 @@
 package com.ecommerce.ecommerce_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -28,6 +29,7 @@ public class LocalUser {
     @Column(name = "password", nullable = false, length = 1000)
     private String password;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Set<Address> addresses;
 
