@@ -27,7 +27,6 @@ public class Order {
     private Set<ProductOrderQuantity> quantities;
 
     public Long getId() {
-
         return id;
     }
 
