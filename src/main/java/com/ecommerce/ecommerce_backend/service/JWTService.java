@@ -29,10 +29,19 @@ public class JWTService {
     }
 
     private static final String USERNAME_KEY = "USERNAME";
+    private static final String EMAIL_KEY = "EMAIL";
 
     public String generateToken(LocalUser user){
         return JWT.create()
                 .withClaim(USERNAME_KEY, user.getUsername())
+                .withIssuer(issuer)
+                .withExpiresAt(new Date(System.currentTimeMillis() + (1000 * expiryInSeconds)))
+                .sign(algorithm);
+    }
+
+    public String generateVerificationJWT(LocalUser user){
+        return JWT.create()
+                .withClaim(EMAIL_KEY, user.getEmail())
                 .withIssuer(issuer)
                 .withExpiresAt(new Date(System.currentTimeMillis() + (1000 * expiryInSeconds)))
                 .sign(algorithm);
