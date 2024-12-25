@@ -40,12 +40,14 @@ public class JWTRequestFilter extends OncePerRequestFilter {
             {
                 String username = jwtService.getUsername(token);
                 Optional<LocalUser> opUser = userDao.findByUsernameIgnoreCase(username);
-                if(opUser.isPresent()){
+                if(opUser.isPresent()) {
                     LocalUser user = opUser.get();
-                    UsernamePasswordAuthenticationToken authentication =
-                            new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>()); // build authentication object of the user
-                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request)); // tell spring this is our authentication | because of it spring security and spring mvc knows about this authentication
-                    SecurityContextHolder.getContext().setAuthentication(authentication); // SecurityContextHolder where the authentication get stored
+                    if (user.isEmailVerified()) {
+                        UsernamePasswordAuthenticationToken authentication =
+                                new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>()); // build authentication object of the user
+                        authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request)); // tell spring this is our authentication | because of it spring security and spring mvc knows about this authentication
+                        SecurityContextHolder.getContext().setAuthentication(authentication); // SecurityContextHolder where the authentication get stored
+                    }
                 }
             } catch (JWTDecodeException ex){}
         }
