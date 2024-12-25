@@ -32,6 +32,7 @@ public class AuthenticationController {
         } catch (UserAlreadyExistException ex){
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         } catch (EmailFailureException e) {
+            System.out.println("error");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
@@ -65,7 +66,7 @@ public class AuthenticationController {
 
     @PostMapping("/verify")
     public ResponseEntity verifyEmail(@RequestParam String token){
-        if(userService.verifyEmail(token)){
+        if(userService.verifyUser(token)){
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
