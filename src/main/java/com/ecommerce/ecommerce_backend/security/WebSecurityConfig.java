@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFilter;
 
@@ -23,7 +24,7 @@ public class WebSecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable).cors(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(request ->
                 request
-                        .requestMatchers("/product", "/auth/login", "/auth/register", "/auth/verify").permitAll()
+                        .requestMatchers("/product", "/auth/login", "/auth/register", "/auth/verify", "/error").permitAll()
                         .anyRequest().authenticated());
         http.addFilterBefore(jwtRequestFilter, AuthenticationFilter.class);
         return http.build();
