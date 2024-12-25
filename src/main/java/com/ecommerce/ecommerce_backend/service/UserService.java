@@ -63,8 +63,8 @@ public class UserService {
                     return jwtService.generateToken(user);
                 } else {
                     List<VerificationToken> verificationTokens = user.getVerificationTokens();
-                    boolean resend = verificationTokens.size() == 0 ||
-                            verificationTokens.get(0).getCreatedTimeStamp().before(new Timestamp(System.currentTimeMillis() - (60 * 60 * 1000)));
+                    boolean resend = verificationTokens.isEmpty() ||
+                            verificationTokens.getFirst().getCreatedTimeStamp().before(new Timestamp(System.currentTimeMillis() - (60 * 60 * 1000)));
                     if (resend) {
                         VerificationToken verificationToken = createVerificationToken(user);
                         verificationTokenDAO.save(verificationToken);
@@ -87,7 +87,7 @@ public class UserService {
     }
 
     @Transactional
-    public boolean verifyEmail(String token){
+    public boolean verifyUser(String token){
         Optional<VerificationToken> opToken = verificationTokenDAO.findByToken(token);
         if(opToken.isPresent()){
             VerificationToken verificationToken = opToken.get();
