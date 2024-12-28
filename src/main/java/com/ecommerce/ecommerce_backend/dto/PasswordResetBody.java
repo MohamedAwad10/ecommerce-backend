@@ -5,11 +5,11 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-public class LoginBody {
+public class PasswordResetBody {
 
-    @NotNull
     @NotBlank
-    private String username;
+    @NotNull
+    private String token;
 
     @NotNull
     @NotBlank
@@ -18,12 +18,12 @@ public class LoginBody {
             , message = "Password should have minimum eight characters, at least one letter and one number")
     private String password;
 
-    public String getUsername() {
-        return username;
+    public String getToken() {
+        return token;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getPassword() {
